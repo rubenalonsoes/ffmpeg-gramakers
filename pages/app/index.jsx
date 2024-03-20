@@ -28,7 +28,7 @@ const App = () => {
   const currentFSls = useRef([]);
 
   const handleExec = async () => {
-    if (!file) {
+    if (!file && !inputFileURL) {
       return;
     }
     setOutputFiles([]);
@@ -37,12 +37,21 @@ const App = () => {
     try {
       setTip("Loading file into browser");
       setSpinning(true);
-      for (const fileItem of fileList) {
+      if(inputFileURL){
         ffmpeg.current.FS(
-          "writeFile",
-          fileItem.name,
-          await fetchFile(fileItem)
-        );
+            "writeFile",
+            name,
+            await fetchFile(inputFileURL)
+          );
+      }
+      else{
+        for (const fileItem of fileList) {
+          ffmpeg.current.FS(
+            "writeFile",
+            fileItem.name,
+            await fetchFile(fileItem)
+          );
+        }
       }
       currentFSls.current = ffmpeg.current.FS("readdir", ".");
       setTip("start executing the command");
@@ -257,7 +266,7 @@ const App = () => {
         placeholder="Please enter the download file name"
         onChange={(event) => setFiles(event.target.value)}
       />
-      <Button type="primary" disabled={!Boolean(file)} onClick={handleGetFiles}>
+      <Button type="primary" disabled={!Boolean(file) && !Boolean(inputFileURL)} onClick={handleGetFiles}>
         confirm
       </Button>
       <br />
