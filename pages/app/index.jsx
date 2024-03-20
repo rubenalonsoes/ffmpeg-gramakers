@@ -245,7 +245,7 @@ const App = () => {
         </div>
       </div>
       <h4>3. Run and get the output file</h4>
-      <Button type="primary" disabled={!Boolean(file)} onClick={handleExec}>
+      <Button type="primary" disabled={!Boolean(file) && !Boolean(inputFileURL)} onClick={handleExec}>
         run
       </Button>
       <br />
