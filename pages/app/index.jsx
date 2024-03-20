@@ -13,6 +13,7 @@ const { Dragger } = Upload;
 const App = () => {
   const [spinning, setSpinning] = useState(false);
   const [tip, setTip] = useState(false);
+  const [inputFileURL, setInputFileURL] = useState("");
   const [inputOptions, setInputOptions] = useState("-i");
   const [outputOptions, setOutputOptions] = useState("");
   const [files, setFiles] = useState("");
@@ -195,6 +196,14 @@ const App = () => {
         </p>
         <p className="ant-upload-text">Click or drag file</p>
       </Dragger>
+      <div className="exec">
+        URL
+        <Input
+          value={inputFileURL}
+          placeholder="please enter input file URL"
+          onChange={(event) => setInputFileURL(event.target.value)}
+        />
+      </div>
       <h4>2. Set ffmpeg options</h4>
       <div className="exec">
         ffmpeg
