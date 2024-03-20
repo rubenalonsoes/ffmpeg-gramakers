@@ -200,7 +200,7 @@ const App = () => {
         <p className="ant-upload-text">Click or drag file</p>
       </Dragger>
       <div className="exec">
-        <br>
+        <br/>
         URL
         <Input
           value={inputFileURL}
