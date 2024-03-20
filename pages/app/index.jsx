@@ -144,9 +144,12 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const { inputOptions, outputOptions, output } = qs.parse(
+    const { inputFileURL, inputOptions, outputOptions, output } = qs.parse(
       window.location.search
     );
+    if (inputFileURL) {
+      setInputFileURL(inputFileURL);
+    }
     if (inputOptions) {
       setInputOptions(inputOptions);
     }
@@ -161,11 +164,11 @@ const App = () => {
   useEffect(() => {
     // run after inputOptions and outputOptions set from querystring
     setTimeout(() => {
-      let queryString = qs.stringify({ inputOptions, outputOptions, output });
+      let queryString = qs.stringify({ inputFileURL, inputOptions, outputOptions, output });
       const newUrl = `${location.origin}${location.pathname}?${queryString}`;
       history.pushState("", "", newUrl);
     });
-  }, [inputOptions, outputOptions, output]);
+  }, [inputFileURL, inputOptions, outputOptions, output]);
 
   return (
     <div className="page-app">
@@ -197,10 +200,11 @@ const App = () => {
         <p className="ant-upload-text">Click or drag file</p>
       </Dragger>
       <div className="exec">
+        <br>
         URL
         <Input
           value={inputFileURL}
-          placeholder="please enter input file URL"
+          placeholder="or enter input file URL"
           onChange={(event) => setInputFileURL(event.target.value)}
         />
       </div>
