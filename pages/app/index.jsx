@@ -38,7 +38,7 @@ const App = () => {
       setTip("Loading file into browser");
       setSpinning(true);
      
-      if (fileList){
+      if (fileList && fileList.length>0){
         for (const fileItem of fileList) {
           ffmpeg.current.FS(
             "writeFile",
