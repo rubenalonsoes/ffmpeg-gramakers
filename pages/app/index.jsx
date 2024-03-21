@@ -43,14 +43,7 @@ const App = () => {
           ffmpeg.current.FS(
             "writeFile",
             fileItem.name,
-            await fetch(url, {
-              method: "GET", // *GET, POST, PUT, DELETE, etc.
-              mode: "no-cors", // no-cors, *cors, same-origin
-              headers: {
-                "Access-Control-Allow-Origin": "*",
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-              }
-            })
+            await fetchFile(fileItem)
           );
         }
       }
@@ -58,7 +51,14 @@ const App = () => {
         ffmpeg.current.FS(
             "writeFile",
             name,
-            await fetch(inputFileURL)
+            await fetch(inputFileURL, {
+              method: "GET", // *GET, POST, PUT, DELETE, etc.
+              mode: "same-origin", // no-cors, *cors, same-origin
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+              }
+            })
           );
       }
       currentFSls.current = ffmpeg.current.FS("readdir", ".");
