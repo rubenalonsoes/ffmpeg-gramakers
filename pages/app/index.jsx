@@ -53,7 +53,7 @@ const App = () => {
             name,
             await fetch(inputFileURL, {
               method: "GET", // *GET, POST, PUT, DELETE, etc.
-              mode: "same-origin", // no-cors, *cors, same-origin
+              mode: "no-cors", // no-cors, *cors, same-origin
               headers: {
                 "Access-Control-Allow-Origin": "*",
                 // 'Content-Type': 'application/x-www-form-urlencoded',
