@@ -41,7 +41,7 @@ const App = () => {
         ffmpeg.current.FS(
             "writeFile",
             name,
-            await fetchFile(inputFileURL)
+            await fetch(inputFileURL)
           );
       }
       else{
