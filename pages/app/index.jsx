@@ -13,7 +13,7 @@ const { Dragger } = Upload;
 const App = () => {
   const [spinning, setSpinning] = useState(false);
   const [tip, setTip] = useState(false);
-  const [inputFileURL, setInputFileURL] = useState("");
+  const [inputFileURL, setInputFileURL] = useState();
   const [inputOptions, setInputOptions] = useState("-i");
   const [outputOptions, setOutputOptions] = useState("");
   const [files, setFiles] = useState("");
@@ -37,14 +37,8 @@ const App = () => {
     try {
       setTip("Loading file into browser");
       setSpinning(true);
-      if(inputFileURL){
-        ffmpeg.current.FS(
-            "writeFile",
-            name,
-            await fetch(inputFileURL)
-          );
-      }
-      else{
+     
+      if (fileList){
         for (const fileItem of fileList) {
           ffmpeg.current.FS(
             "writeFile",
@@ -59,6 +53,13 @@ const App = () => {
             })
           );
         }
+      }
+      else if(inputFileURL){
+        ffmpeg.current.FS(
+            "writeFile",
+            name,
+            await fetch(inputFileURL)
+          );
       }
       currentFSls.current = ffmpeg.current.FS("readdir", ".");
       setTip("start executing the command");
